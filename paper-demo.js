@@ -1,3 +1,5 @@
+"use strict";
+
 // declare global variables
 let clickingOnSwing = false;
 
