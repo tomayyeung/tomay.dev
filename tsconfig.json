@@ -3,7 +3,7 @@
         "target": "ES2016",
         "module": "CommonJS",
         "strict": true,
-        "outDir": ".",
+        "outDir": "./dist/",
         "rootDir": ".",
     },
     "include": ["**/*.ts"],
