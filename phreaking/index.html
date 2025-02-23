@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../styles/phreaking.css">
+</head>
+
+<body>
+    <h1>Phreaking Quiz</h1>
+
+    <div id="main-quiz">
+
+        <div id="info">
+            <p id="progress"></p>
+            <p id="incorrect"></p>
+        </div>
+
+        <button id="play-sound">Play Sound</button>
+
+        <div id="sf">
+            <h2>Single Frequency Tones</h2>
+            <button id="sf1" class="phone-button">1</button>
+            <button id="sf2">2</button>
+            <button id="sf3">3</button>
+
+            <button id="sf4">4</button>
+            <button id="sf5">5</button>
+            <button id="sf6">6</button>
+
+            <button id="sf7">7</button>
+            <button id="sf8">8</button>
+            <button id="sf9">9</button>
+
+            <button id="sf0">0</button>
+        </div>
+
+        <div id="mf">
+            <h2>Multi Frequency Tones</h2>
+            <button id="mf1">1</button>
+            <button id="mf2">2</button>
+            <button id="mf3">3</button>
+
+            <button id="mf4">4</button>
+            <button id="mf5">5</button>
+            <button id="mf6">6</button>
+
+            <button id="mf7">7</button>
+            <button id="mf8">8</button>
+            <button id="mf9">9</button>
+
+            <button id="mfkp">KP</button>
+            <button id="mf0">0</button>
+            <button id="mfst">ST</button>
+        </div>
+
+        <div id="dtmf">
+            <h2>Dual-Tone Multi-Frequency Tones</h2>
+
+            <div>
+                <button id="dtmf1" class="phone-button">1</button><button id="dtmf2"
+                    class="phone-button">2</button><button id="dtmf3" class="phone-button">3</button><button id="dtmfA"
+                    class="phone-button">A</button>
+            </div>
+
+            <div class="phone-button-row">
+                <button id="dtmf4" class="phone-button">4</button>
+                <button id="dtmf5" class="phone-button">5</button>
+                <button id="dtmf6" class="phone-button">6</button>
+                <button id="dtmfB" class="phone-button">B</button>
+            </div>
+
+            <div class="phone-button-row">
+                <button id="dtmf7" class="phone-button">7</button>
+                <button id="dtmf8" class="phone-button">8</button>
+                <button id="dtmf9" class="phone-button">9</button>
+                <button id="dtmfC" class="phone-button">C</button>
+            </div>
+
+            <div class="phone-button-row">
+                <button id="dtmfstar" class="phone-button">*</button>
+                <button id="dtmf0" class="phone-button">0</button>
+                <button id="dtmfpound" class="phone-button">#</button>
+                <button id="dtmfD" class="phone-button">D</button>
+            </div>
+        </div>
+
+        <div id="other">
+            <h2>Other</h2>
+            <button id="2600hz">2600 hz</button>
+            <button id="rf">Ring forward</button>
+        </div>
+    </div>
+
+    <p id="indicator"></p>
+
+    <p id="complete">Quiz complete. Comgratulations! <br>
+        Your total incorrect guesses:</p>
+
+    <script src="../dist/phreaking/phreaking.js"></script>
+</body>
+
+</html>
