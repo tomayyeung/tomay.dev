@@ -14,6 +14,8 @@ function shuffle(array: string[]) {
 }
 
 function play_sound() {
+    if (indicatorUp) return;
+
     indicatorElem!.style.display = "none";
 
     current_tone = current_tone || remaing_tones.pop() || "";
@@ -30,6 +32,8 @@ function play_sound() {
 }
 
 function guess(button: string) {
+    if (indicatorUp) return;
+
     if (button == current_tone) {
         // update progress
         progress++;
@@ -37,9 +41,12 @@ function guess(button: string) {
         current_tone = "";
 
         // update indicator
-        indicatorElem!.innerHTML = "Correct!";
+        indicatorTextElem!.innerHTML = "&checkmark; Correct!";
         indicatorElem!.style.backgroundColor = "green";
+        // indicatorTextElem!.style.color = "green";
+        // indicatorElem!.style.borderColor = "green";
         indicatorElem!.style.display = "block";
+        indicatorUp = true;
 
         // update button
         const buttonElem = document.getElementById(`${button}`) as HTMLButtonElement;
@@ -57,15 +64,23 @@ function guess(button: string) {
         incorrectElem!.innerHTML = `Incorrect guesses: ${incorrect}`;
 
         // update indicator
-        indicatorElem!.innerHTML = "Incorrect!";
+        indicatorTextElem!.innerHTML = "&cross; Incorrect!";
         indicatorElem!.style.backgroundColor = "red";
+        // indicatorTextElem!.style.color = "red";
+        // indicatorElem!.style.borderColor = "red";
         indicatorElem!.style.display = "block";
+        indicatorUp = true;
     }
+}
+
+function closeIndicatorPopup() {
+    indicatorElem!.style.display = "none";
+    indicatorUp = false;
 }
 
 function done() {
     // put on completion screen
-    document.getElementById("main-quiz")!.style.display = "none";
+    quizElem!.style.display = "none";
 
     const completeElem = document.getElementById("complete");
     completeElem!.innerHTML += `${incorrect}`;
@@ -88,6 +103,10 @@ for (let i = 0; i < 10; i++) {
     tones.push(id);
     document.getElementById(id)!.addEventListener("click", () => guess(id));
 }
+tones.push("mfkp");
+document.getElementById("mfkp")!.addEventListener("click", () => guess("mfkp"));
+tones.push("mfst");
+document.getElementById("mfst")!.addEventListener("click", () => guess("mfst"));
 
 // dtmf
 for (let i = 0; i < 10; i++) {
@@ -95,8 +114,21 @@ for (let i = 0; i < 10; i++) {
     tones.push(id);
     document.getElementById(id)!.addEventListener("click", () => guess(id));
 }
+for (let c of "ABCD") {
+    let id = `dtmf${c}`;
+    tones.push(id);
+    document.getElementById(id)!.addEventListener("click", () => guess(id));
+}
+tones.push("dtmfstar");
+document.getElementById("dtmfstar")!.addEventListener("click", () => guess("dtmfstar"));
+tones.push("dtmfpound");
+document.getElementById("dtmfpound")!.addEventListener("click", () => guess("dtmfpound"));
 
 // other
+tones.push("2600hz");
+document.getElementById("2600hz")!.addEventListener("click", () => guess("2600hz"));
+tones.push("rf");
+document.getElementById("rf")!.addEventListener("click", () => guess("rf"));
 
 const NUM_TONES = tones.length;
 
@@ -104,6 +136,8 @@ let remaing_tones = [...tones];
 shuffle(remaing_tones);
 
 let current_tone = "";
+
+const quizElem = document.getElementById("main-quiz");
 
 document.getElementById("play-sound")!.addEventListener("click", play_sound);
 
@@ -116,3 +150,7 @@ const incorrectElem = document.getElementById("incorrect");
 incorrectElem!.innerHTML = `Incorrect guesses: ${incorrect}`;
 
 const indicatorElem = document.getElementById("indicator");
+const indicatorTextElem = document.getElementById("indicator-text");
+document.getElementById("indicator-button")!.addEventListener("click", closeIndicatorPopup);
+
+let indicatorUp = false;

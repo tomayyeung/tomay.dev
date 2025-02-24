@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>CS 286 - Phreaking Activity</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../styles/phreaking.css">
@@ -14,12 +14,13 @@
 <body>
     <h1>Phreaking Quiz</h1>
 
-    <div id="main-quiz">
+    <div id="info">
+        <p id="progress"></p>
+        <p id="incorrect"></p>
+    </div>
 
-        <div id="info">
-            <p id="progress"></p>
-            <p id="incorrect"></p>
-        </div>
+
+    <div id="main-quiz">
 
         <button id="play-sound">Play Sound</button>
 
@@ -59,45 +60,48 @@
             <button id="mfst">ST</button>
         </div>
 
+        <h2>Dual-Tone Multi-Frequency Tones</h2>
         <div id="dtmf">
-            <h2>Dual-Tone Multi-Frequency Tones</h2>
 
-            <div>
-                <button id="dtmf1" class="phone-button">1</button><button id="dtmf2"
-                    class="phone-button">2</button><button id="dtmf3" class="phone-button">3</button><button id="dtmfA"
-                    class="phone-button">A</button>
+            <div class="phone-button-row">
+                <button id="dtmf1" class="dtmf-phone-button">1</button>
+                <button id="dtmf2" class="dtmf-phone-button">2</button>
+                <button id="dtmf3" class="dtmf-phone-button">3</button>
+                <button id="dtmfA" class="dtmf-phone-button">A</button>
             </div>
 
             <div class="phone-button-row">
-                <button id="dtmf4" class="phone-button">4</button>
-                <button id="dtmf5" class="phone-button">5</button>
-                <button id="dtmf6" class="phone-button">6</button>
-                <button id="dtmfB" class="phone-button">B</button>
+                <button id="dtmf4" class="dtmf-phone-button">4</button>
+                <button id="dtmf5" class="dtmf-phone-button">5</button>
+                <button id="dtmf6" class="dtmf-phone-button">6</button>
+                <button id="dtmfB" class="dtmf-phone-button">B</button>
             </div>
 
             <div class="phone-button-row">
-                <button id="dtmf7" class="phone-button">7</button>
-                <button id="dtmf8" class="phone-button">8</button>
-                <button id="dtmf9" class="phone-button">9</button>
-                <button id="dtmfC" class="phone-button">C</button>
+                <button id="dtmf7" class="dtmf-phone-button">7</button>
+                <button id="dtmf8" class="dtmf-phone-button">8</button>
+                <button id="dtmf9" class="dtmf-phone-button">9</button>
+                <button id="dtmfC" class="dtmf-phone-button">C</button>
             </div>
 
             <div class="phone-button-row">
-                <button id="dtmfstar" class="phone-button">*</button>
-                <button id="dtmf0" class="phone-button">0</button>
-                <button id="dtmfpound" class="phone-button">#</button>
-                <button id="dtmfD" class="phone-button">D</button>
+                <button id="dtmfstar" class="dtmf-phone-button">*</button>
+                <button id="dtmf0" class="dtmf-phone-button">0</button>
+                <button id="dtmfpound" class="dtmf-phone-button">#</button>
+                <button id="dtmfD" class="dtmf-phone-button">D</button>
             </div>
         </div>
 
+        <h2>Other</h2>
         <div id="other">
-            <h2>Other</h2>
-            <button id="2600hz">2600 hz</button>
-            <button id="rf">Ring forward</button>
+            <button id="2600hz" class="other-button">2600 hz</button>
+            <button id="rf" class="other-button">Ring forward</button>
         </div>
     </div>
 
-    <p id="indicator"></p>
+    <div id="indicator"><button id="indicator-button">&times;</button>
+        <p id="indicator-text"></p>
+    </div>
 
     <p id="complete">Quiz complete. Comgratulations! <br>
         Your total incorrect guesses:</p>
