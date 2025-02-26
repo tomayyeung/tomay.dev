@@ -1,4 +1,4 @@
-// misc helpers
+// misc helper -----
 /**
  * I stole this
  */
@@ -13,20 +13,22 @@ function shuffle(array: string[]) {
         [array[i], array[j]] = [array[j], array[i]];
     }
 }
-const d = new Date();
 
 function play_sound() {
     if (indicatorUp) return;
 
     indicatorElem!.style.display = "none";
 
+    // a. don't move on to the next tone if they haven't guessed the current one
+    // b. grab the next tone
+    // c. because typescript
     current_tone = current_tone || remaing_tones.pop() || "";
 
     console.log(current_tone);
     
     let audio_file: HTMLAudioElement;
     try {
-        audio_file = new Audio(`./sounds/${current_tone}.ogg`);
+        audio_file = new Audio(`../../phreaking/sounds/${current_tone}.ogg`);
         audio_file.play();
     } catch (error) {
         console.log(error);
@@ -35,8 +37,9 @@ function play_sound() {
 
 function guess(button: string) {
     if (indicatorUp) return;
+    if (current_tone == "") return; // guessed before listening to the tone
 
-    if (button == current_tone) {
+    if (button == current_tone) { // correct
         // update progress
         progress++;
         progressElem!.innerHTML = `Progress: ${progress}/${NUM_TONES}`;
@@ -45,13 +48,8 @@ function guess(button: string) {
         // update indicator
         indicatorTextElem!.innerHTML = "&checkmark; Correct!";
         indicatorElem!.style.backgroundColor = "green";
-        indicatorElem!.style.display = "block";
-        indicatorUp = true;
 
-        moveProgressBar();
-        setTimeout(closeIndicatorPopup, 5000);
-
-        // update button
+        // update that button
         const buttonElem = document.getElementById(`${button}`) as HTMLButtonElement;
         if (buttonElem) {
             buttonElem.disabled = true;
@@ -59,9 +57,8 @@ function guess(button: string) {
 
         // check done
         if (progress == NUM_TONES) done();
-    } else {
-        if (current_tone == "") return; // guessed before listening to the tone
-
+    }
+    else { // incorrect
         // update incorrect
         incorrect++;
         incorrectElem!.innerHTML = `Incorrect guesses: ${incorrect}`;
@@ -69,17 +66,34 @@ function guess(button: string) {
         // update indicator
         indicatorTextElem!.innerHTML = "&cross; Incorrect!";
         indicatorElem!.style.backgroundColor = "red";
-        indicatorElem!.style.display = "block";
-        indicatorUp = true;
-
-        moveProgressBar();
-        setTimeout(closeIndicatorPopup, 5000);
     }
+    indicatorElem!.style.display = "block";
+    indicatorUp = true;
+
+    indicatorProgressBar = 0;
+    moveProgressBar();
+}
+
+function moveProgressBar() {
+    if (indicatorProgressBar != 0) return;
+    
+    indicatorProgressBar = 1;
+    let width = 1;
+    progressBarID = setInterval(() => {
+        if (width >= 100) {
+            width = 0;
+            closeIndicatorPopup();
+        } else {
+            width += 1000/indicatorTime; // because interval is every 10 milliseconds
+            indicatorProgressBarElem!.style.width = width + "%";
+        }
+    }, 10);
 }
 
 function closeIndicatorPopup() {
     indicatorElem!.style.display = "none";
     indicatorUp = false;
+    clearInterval(progressBarID);
 }
 
 function done() {
@@ -91,7 +105,7 @@ function done() {
     completeElem!.style.display = "block";
 }
 
-// set up tones
+// set up tones -----
 let tones: string[] = [];
 
 // sf
@@ -141,10 +155,12 @@ shuffle(remaing_tones);
 
 let current_tone = "";
 
+// grab elements -----
 const quizElem = document.getElementById("main-quiz");
 
 document.getElementById("play-sound")!.addEventListener("click", play_sound);
 
+// info
 let progress = 0;
 const progressElem = document.getElementById("progress");
 progressElem!.innerHTML = `Progress: ${progress}/${NUM_TONES}`;
@@ -153,26 +169,13 @@ let incorrect = 0;
 const incorrectElem = document.getElementById("incorrect");
 incorrectElem!.innerHTML = `Incorrect guesses: ${incorrect}`;
 
+// correct/incorrect indicator
 const indicatorElem = document.getElementById("indicator");
 const indicatorTextElem = document.getElementById("indicator-text");
 document.getElementById("indicator-button")!.addEventListener("click", closeIndicatorPopup);
 const indicatorProgressBarElem = document.getElementById("indicator-progress-bar");
 
-let progressBar = 0;
-function moveProgressBar() {
-    if (progressBar == 0) {
-        progressBar = 1;
-        let width = 1;
-        let id = setInterval(frame, 10);
-        function frame() {
-            if (width >= 100) {
-                clearInterval(id);
-                progressBar = 0;
-            } else {
-                width+=0.2;
-                indicatorProgressBarElem!.style.width = width + "%";
-            }
-        }
-    }
-}
-let indicatorUp = false;
+const indicatorTime = 5000; // indicator shows up for 5000 milliseconds (or user can close the popup)
+let indicatorProgressBar = 0;
+let indicatorUp = false; // is the indicator showing
+let progressBarID: number;
