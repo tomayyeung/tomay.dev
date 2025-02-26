@@ -1,3 +1,4 @@
+// misc helpers
 /**
  * I stole this
  */
@@ -12,6 +13,7 @@ function shuffle(array: string[]) {
         [array[i], array[j]] = [array[j], array[i]];
     }
 }
+const d = new Date();
 
 function play_sound() {
     if (indicatorUp) return;
@@ -43,10 +45,11 @@ function guess(button: string) {
         // update indicator
         indicatorTextElem!.innerHTML = "&checkmark; Correct!";
         indicatorElem!.style.backgroundColor = "green";
-        // indicatorTextElem!.style.color = "green";
-        // indicatorElem!.style.borderColor = "green";
         indicatorElem!.style.display = "block";
         indicatorUp = true;
+
+        moveProgressBar();
+        setTimeout(closeIndicatorPopup, 5000);
 
         // update button
         const buttonElem = document.getElementById(`${button}`) as HTMLButtonElement;
@@ -66,10 +69,11 @@ function guess(button: string) {
         // update indicator
         indicatorTextElem!.innerHTML = "&cross; Incorrect!";
         indicatorElem!.style.backgroundColor = "red";
-        // indicatorTextElem!.style.color = "red";
-        // indicatorElem!.style.borderColor = "red";
         indicatorElem!.style.display = "block";
         indicatorUp = true;
+
+        moveProgressBar();
+        setTimeout(closeIndicatorPopup, 5000);
     }
 }
 
@@ -152,5 +156,23 @@ incorrectElem!.innerHTML = `Incorrect guesses: ${incorrect}`;
 const indicatorElem = document.getElementById("indicator");
 const indicatorTextElem = document.getElementById("indicator-text");
 document.getElementById("indicator-button")!.addEventListener("click", closeIndicatorPopup);
+const indicatorProgressBarElem = document.getElementById("indicator-progress-bar");
 
+let progressBar = 0;
+function moveProgressBar() {
+    if (progressBar == 0) {
+        progressBar = 1;
+        let width = 1;
+        let id = setInterval(frame, 10);
+        function frame() {
+            if (width >= 100) {
+                clearInterval(id);
+                progressBar = 0;
+            } else {
+                width+=0.2;
+                indicatorProgressBarElem!.style.width = width + "%";
+            }
+        }
+    }
+}
 let indicatorUp = false;
