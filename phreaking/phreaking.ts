@@ -32,7 +32,7 @@ function play_sound() {
         audio_file.play();
     } catch (error) {
         console.log(error);
-    };
+    }
 }
 
 function guess(button: string) {
@@ -67,6 +67,8 @@ function guess(button: string) {
         indicatorTextElem!.innerHTML = "&cross; Incorrect!";
         indicatorElem!.style.backgroundColor = "red";
     }
+
+    // update indicator after a guess
     indicatorElem!.style.display = "block";
     indicatorUp = true;
 
@@ -100,7 +102,6 @@ function done() {
     // put on completion screen
     quizElem!.style.display = "none";
 
-    const completeElem = document.getElementById("complete");
     completeElem!.innerHTML += `${incorrect}`;
     completeElem!.style.display = "block";
 }
@@ -110,43 +111,42 @@ let tones: string[] = [];
 
 // sf
 for (let i = 0; i < 10; i++) {
-    let id = `sf${i}`;
+    const id = `sf${i}`;
     tones.push(id);
-    document.getElementById(id)!.addEventListener("click", () => guess(id));
 }
 
 // mf
 for (let i = 0; i < 10; i++) {
-    let id = `mf${i}`;
+    const id = `mf${i}`;
     tones.push(id);
-    document.getElementById(id)!.addEventListener("click", () => guess(id));
 }
 tones.push("mfkp");
-document.getElementById("mfkp")!.addEventListener("click", () => guess("mfkp"));
 tones.push("mfst");
-document.getElementById("mfst")!.addEventListener("click", () => guess("mfst"));
 
 // dtmf
 for (let i = 0; i < 10; i++) {
-    let id = `dtmf${i}`;
+    const id = `dtmf${i}`;
     tones.push(id);
-    document.getElementById(id)!.addEventListener("click", () => guess(id));
 }
 for (let c of "ABCD") {
-    let id = `dtmf${c}`;
+    const id = `dtmf${c}`;
     tones.push(id);
-    document.getElementById(id)!.addEventListener("click", () => guess(id));
 }
 tones.push("dtmfstar");
-document.getElementById("dtmfstar")!.addEventListener("click", () => guess("dtmfstar"));
 tones.push("dtmfpound");
-document.getElementById("dtmfpound")!.addEventListener("click", () => guess("dtmfpound"));
+
+// coins
+tones.push("5cent");
+tones.push("10cent");
+tones.push("25cent");
 
 // other
 tones.push("2600hz");
-document.getElementById("2600hz")!.addEventListener("click", () => guess("2600hz"));
 tones.push("rf");
-document.getElementById("rf")!.addEventListener("click", () => guess("rf"));
+
+tones.forEach((tone) => 
+    document.getElementById(tone)!.addEventListener("click", () => guess(tone))
+);
 
 const NUM_TONES = tones.length;
 
@@ -159,6 +159,8 @@ let current_tone = "";
 const quizElem = document.getElementById("main-quiz");
 
 document.getElementById("play-sound")!.addEventListener("click", play_sound);
+
+const completeElem = document.getElementById("complete");
 
 // info
 let progress = 0;

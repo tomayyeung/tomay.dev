@@ -80,7 +80,7 @@ button:disabled:hover {
     bottom: -5px;
     height: 3pt;
     transform: translate(0, -5px);
-    background: black;
+    background: white;
     display: inline-block;
   }
 
@@ -129,7 +129,7 @@ div#dtmf {
 
 .dtmf-phone-button {
     color: white;
-    background-color: cadetblue;
+    background-color: hsl(182, 25%, 50%);
 }
 
 .dtmf-phone-button:hover {
@@ -140,10 +140,39 @@ div#dtmf {
     background-color: hsl(180, 25.5%, 70%);
 }
 
-/* other tones */
-#other {
-    text-align: center;
+/* coin tones */
+#coins {
+    background-color:rgb(105, 193, 215);
+    width: fit-content;
+    display: flex;
+    margin: auto;
+    border-style: solid;
+    border-radius: 5pt;
+    padding: 0.25em;
 }
+
+.coin-button {
+    color: black;
+    background-color: hsl(43, 74%, 59%);
+    font-size: large;
+    width: auto;
+    height: 2em;
+    margin: 0.25em;
+    border-radius: 5pt;    
+}
+
+.coin-button:hover {
+    background-color: hsl(43, 74%, 49%);
+}
+
+.coin-button:disabled {
+    background-color: hsl(0, 30%, 70%);
+}
+
+/* other tones */
+/* #other {
+    text-align: center;
+} */
 
 .other-button {
     color: white;
