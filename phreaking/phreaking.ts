@@ -184,7 +184,6 @@ tones.push("25cent");
 
 // other
 tones.push("2600hz");
-tones.push("rf");
 
 let hardModeTones = [...tones];
 
