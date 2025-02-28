@@ -74,15 +74,18 @@ button:disabled:hover {
 }
 
 /* mode - I stole most this */
-#mode-switch-container {
+#switches-container {
     position: absolute;
-    display: flex;
-    align-items: center;
     top: 0;
 }
 
+.switch-container {
+    display: flex;
+    align-items: center;
+}
+
 /* The switch - the box around the slider */
-#mode-switch {
+.switch {
     position: relative;
     display: inline-block;
     width: 60px;
@@ -90,7 +93,7 @@ button:disabled:hover {
 }
 
 /* Hide default HTML checkbox */
-#mode-switch input {
+.switch input {
     opacity: 0;
     width: 0;
     height: 0;
@@ -104,10 +107,33 @@ button:disabled:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
     -webkit-transition: .4s;
     transition: .4s;
     border-radius: 34px;
+}
+
+#mode-switch-slider {
+    background-color: #ccc;
+}
+
+input:checked + #mode-switch-slider {
+    background-color: #2196F3;
+}
+
+input:focus + #mode-switch-slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+#hard-switch-slider {
+    background-color: rgb(70, 154, 59);
+}
+
+input:checked + #hard-switch-slider {
+    background-color: rgb(206, 30, 30);
+}
+
+input:focus + #hard-switch-slider {
+    box-shadow: 0 0 1px rgb(206, 30, 30);
 }
 
 .slider:before {
@@ -121,14 +147,6 @@ button:disabled:hover {
     -webkit-transition: .4s;
     transition: .4s;
     border-radius: 50%;
-}
-
-input:checked + .slider {
-    background-color: #2196F3;
-}
-
-input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
 }
 
 input:checked + .slider:before {
@@ -171,12 +189,29 @@ div.phone-button-row {
     display: flex;
 }
 
-.dtmf-phone-button {
+.mf-phone-button, .dtmf-phone-button {
     font-size: large;
     width: 2em;
     height: 2em;
     margin: 0.25em;
     border-radius: 10%;
+}
+
+/* mf */
+div#mf-container {
+    display: none;
+}
+
+div#mf {
+    background-color: bisque;
+}
+
+.mf-phone-button {
+    background-color: hsl(60, 56%, 91%);
+}
+
+.mf-phone-button:hover {
+    background-color: hsl(60, 56%, 81%);
 }
 
 /* dtmf */

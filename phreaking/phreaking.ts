@@ -14,6 +14,36 @@ function shuffle(array: string[]) {
     }
 }
 
+function resetQuiz() {
+    remaing_tones = hardMode ? [...hardModeTones] : [...tones];
+    shuffle(remaing_tones);
+
+    NUM_TONES = remaing_tones.length;
+
+    current_tone = "";
+
+    // update info
+    progress = 0;
+    progressElem!.innerHTML = `Progress: 0/${NUM_TONES}`;
+    incorrect = 0;
+    incorrectElem!.innerHTML = `Incorrect guesses: 0`;
+
+    // update buttons
+    hardModeTones.forEach((tone) => {
+        const buttonElem = document.getElementById(tone) as HTMLButtonElement;
+        buttonElem!.disabled = false;
+    });
+
+}
+
+function toggleHardMode() {
+    hardMode = !hardMode;
+
+    mfTonesElem!.style.display = hardMode ? "block" : "none";
+
+    resetQuiz();
+}
+
 function toggleMode() {
     quizMode = !quizMode;
 
@@ -24,20 +54,10 @@ function toggleMode() {
     }
     // practice
     else {
-        // update info
-        progress = 0;
-        progressElem!.innerHTML = `Progress: 0/${NUM_TONES}`;
-        incorrect = 0;
-        incorrectElem!.innerHTML = `Incorrect guesses: 0`;
-
         playSoundElem!.style.display = "none";
         infoElem!.style.display = "none";
 
-        // update buttons
-        tones.forEach((tone) => {
-            const buttonElem = document.getElementById(tone) as HTMLButtonElement;
-            buttonElem!.disabled = false;
-        })            
+        resetQuiz();
     }
 }
 
@@ -57,8 +77,8 @@ function playSoundQuiz() {
 }
 
 function toneButtonClick(button: string) {
+    playSound(button);
     if (quizMode) guess(button);
-    else playSound(button);
 }
 
 function guess(tone: string) {
@@ -145,20 +165,6 @@ function done() {
 // set up tones -----
 let tones: string[] = [];
 
-// sf
-for (let i = 0; i < 10; i++) {
-    const id = `sf${i}`;
-    tones.push(id);
-}
-
-// mf
-for (let i = 0; i < 10; i++) {
-    const id = `mf${i}`;
-    tones.push(id);
-}
-tones.push("mfkp");
-tones.push("mfst");
-
 // dtmf
 for (let i = 0; i < 10; i++) {
     const id = `dtmf${i}`;
@@ -180,11 +186,21 @@ tones.push("25cent");
 tones.push("2600hz");
 tones.push("rf");
 
-tones.forEach((tone) => 
+let hardModeTones = [...tones];
+
+// mf
+for (let i = 0; i < 10; i++) {
+    const id = `mf${i}`;
+    hardModeTones.push(id);
+}
+hardModeTones.push("mfkp");
+hardModeTones.push("mfst");
+
+hardModeTones.forEach((tone) => 
     document.getElementById(tone)!.addEventListener("click", () => toneButtonClick(tone))
 );
 
-const NUM_TONES = tones.length;
+let NUM_TONES = tones.length;
 
 let remaing_tones = [...tones];
 shuffle(remaing_tones);
@@ -225,3 +241,9 @@ let progressBarID: number;
 let quizMode = true;
 const modeSwitchElem = document.getElementById("mode-switch-checkbox");
 modeSwitchElem!.addEventListener("change", toggleMode);
+
+// hard mode toggle
+let hardMode = false;
+const mfTonesElem = document.getElementById("mf-container");
+const hardSwitchElem = document.getElementById("hard-switch-checkbox");
+hardSwitchElem!.addEventListener("change", toggleHardMode);
