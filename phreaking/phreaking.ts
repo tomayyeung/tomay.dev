@@ -14,7 +14,34 @@ function shuffle(array: string[]) {
     }
 }
 
-function play_sound() {
+function toggleMode() {
+    quizMode = !quizMode;
+
+    // quiz
+    if (quizMode) {
+        infoElem!.style.display = "block";
+        playSoundElem!.style.display = "inline-block";
+    }
+    // practice
+    else {
+        // update info
+        progress = 0;
+        progressElem!.innerHTML = `Progress: 0/${NUM_TONES}`;
+        incorrect = 0;
+        incorrectElem!.innerHTML = `Incorrect guesses: 0`;
+
+        playSoundElem!.style.display = "none";
+        infoElem!.style.display = "none";
+
+        // update buttons
+        tones.forEach((tone) => {
+            const buttonElem = document.getElementById(tone) as HTMLButtonElement;
+            buttonElem!.disabled = false;
+        })            
+    }
+}
+
+function playSoundQuiz() {
     if (indicatorUp) return;
 
     indicatorElem!.style.display = "none";
@@ -26,20 +53,19 @@ function play_sound() {
 
     console.log(current_tone);
     
-    let audio_file: HTMLAudioElement;
-    try {
-        audio_file = new Audio(`../../phreaking/sounds/${current_tone}.ogg`);
-        audio_file.play();
-    } catch (error) {
-        console.log(error);
-    }
+    playSound(current_tone);
 }
 
-function guess(button: string) {
+function toneButtonClick(button: string) {
+    if (quizMode) guess(button);
+    else playSound(button);
+}
+
+function guess(tone: string) {
     if (indicatorUp) return;
     if (current_tone == "") return; // guessed before listening to the tone
 
-    if (button == current_tone) { // correct
+    if (tone == current_tone) { // correct
         // update progress
         progress++;
         progressElem!.innerHTML = `Progress: ${progress}/${NUM_TONES}`;
@@ -50,7 +76,7 @@ function guess(button: string) {
         indicatorElem!.style.backgroundColor = "green";
 
         // update that button
-        const buttonElem = document.getElementById(`${button}`) as HTMLButtonElement;
+        const buttonElem = document.getElementById(`${tone}`) as HTMLButtonElement;
         if (buttonElem) {
             buttonElem.disabled = true;
         }
@@ -74,6 +100,16 @@ function guess(button: string) {
 
     indicatorProgressBar = 0;
     moveProgressBar();
+}
+
+function playSound(tone: string) {
+    let audio_file: HTMLAudioElement;
+    try {
+        audio_file = new Audio(`../../phreaking/sounds/${tone}.ogg`);
+        audio_file.play();
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 function moveProgressBar() {
@@ -145,7 +181,7 @@ tones.push("2600hz");
 tones.push("rf");
 
 tones.forEach((tone) => 
-    document.getElementById(tone)!.addEventListener("click", () => guess(tone))
+    document.getElementById(tone)!.addEventListener("click", () => toneButtonClick(tone))
 );
 
 const NUM_TONES = tones.length;
@@ -158,11 +194,14 @@ let current_tone = "";
 // grab elements -----
 const quizElem = document.getElementById("main-quiz");
 
-document.getElementById("play-sound")!.addEventListener("click", play_sound);
+const playSoundElem = document.getElementById("play-sound");
+playSoundElem!.addEventListener("click", playSoundQuiz);
 
 const completeElem = document.getElementById("complete");
 
 // info
+const infoElem = document.getElementById("info");
+
 let progress = 0;
 const progressElem = document.getElementById("progress");
 progressElem!.innerHTML = `Progress: ${progress}/${NUM_TONES}`;
@@ -181,3 +220,8 @@ const indicatorTime = 5000; // indicator shows up for 5000 milliseconds (or user
 let indicatorProgressBar = 0;
 let indicatorUp = false; // is the indicator showing
 let progressBarID: number;
+
+// practice/quiz toggle
+let quizMode = true;
+const modeSwitchElem = document.getElementById("mode-switch-checkbox");
+modeSwitchElem!.addEventListener("change", toggleMode);

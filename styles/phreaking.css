@@ -32,17 +32,6 @@ button:disabled:hover {
     margin: 5pt;
 }
 
-@media only screen and (max-width: 600px) {
-    #info {
-        position: initial;
-        display: block;
-        padding: 0;
-    }
-    #info > p {
-        text-align: center;
-    }
-}
-
 /* correct/incorrect indicator */
 #indicator {
     display: none;
@@ -82,7 +71,75 @@ button:disabled:hover {
     transform: translate(0, -5px);
     background: white;
     display: inline-block;
-  }
+}
+
+/* mode - I stole most this */
+#mode-switch-container {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 0;
+}
+
+/* The switch - the box around the slider */
+#mode-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide default HTML checkbox */
+#mode-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.switch-text {
+    padding: 5px;
+}
 
 /* main quiz */
 #main-quiz {
@@ -170,10 +227,6 @@ div#dtmf {
 }
 
 /* other tones */
-/* #other {
-    text-align: center;
-} */
-
 .other-button {
     color: white;
     background-color: hsl(0, 30%, 50%);
@@ -190,4 +243,21 @@ div#dtmf {
 
 .other-button:disabled {
     background-color: hsl(0, 30%, 70%);
+}
+
+@media only screen and (max-width: 600px) {
+    #info {
+        position: initial;
+        padding: 0;
+    }
+
+    #info > p {
+        text-align: center;
+    }
+
+    #mode-switch-container {
+        position: initial;
+        margin: auto;
+        width: fit-content;
+    }
 }
