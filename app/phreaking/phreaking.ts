@@ -162,14 +162,14 @@ function done() {
 }
 
 // set up tones -----
-let tones: string[] = [];
+const tones: string[] = [];
 
 // dtmf
 for (let i = 0; i < 10; i++) {
     const id = `dtmf${i}`;
     tones.push(id);
 }
-for (let c of "ABCD") {
+for (const c of "ABCD") {
     const id = `dtmf${c}`;
     tones.push(id);
 }
@@ -184,7 +184,7 @@ tones.push("25cent");
 // other
 tones.push("2600hz");
 
-let hardModeTones = [...tones];
+const hardModeTones = [...tones];
 
 // mf
 for (let i = 0; i < 10; i++) {
@@ -194,7 +194,7 @@ for (let i = 0; i < 10; i++) {
 hardModeTones.push("mfkp");
 hardModeTones.push("mfst");
 
-for (let tone of hardModeTones) {
+for (const tone of hardModeTones) {
     document.getElementById(tone)!.addEventListener("click", () => toneButtonClick(tone))
 }
 

@@ -1,13 +1,11 @@
 const c: HTMLCanvasElement = document.getElementById("colored-square") as HTMLCanvasElement;
-let ctest = document.getElementById("canvas-support");
-console.log(ctest == null);
 const testCanvasSupportDisplay = false;
 
 // player should not be able to get a larger fov with a larger monitor - max frame width and frame height
 const maxFrameWidth = 1500;
 const maxFrameHeight = 800;
-let frameWidth = maxFrameWidth;
-let frameHeight = maxFrameHeight;
+const frameWidth = maxFrameWidth;
+const frameHeight = maxFrameHeight;
 
 const worldWidth = 4500;
 const worldHeight = 2500;
@@ -20,33 +18,35 @@ class Frame {
     y: number; // top
     width: number;
     height: number;
-    toPixels: number;
+    // toPixels: number;
 
     constructor(windowWidth: number, windowHeight: number) {
         this.x = 0; // will be immediately updated in run()
         this.y = 0;
 
-        this.width = 0, this.height = 0, this.toPixels = 0; // initialize these values first, then immediately adjust
-        this.adjust(windowWidth, windowHeight);
+        // this.width = 0, this.height = 0, this.toPixels = 0; // initialize these values first, then immediately adjust
+        // this.adjust(windowWidth, windowHeight);
+        this.width = windowWidth;
+        this.height = windowHeight;
     }
 
-    adjust(windowWidth: number, windowHeight: number) {
-        // compare ratios - which window dimension, relative to an ideal frame, is smaller?
-        let windowtoMaxFrameX = windowWidth/maxFrameWidth;
-        let windowtoMaxFrameY = windowHeight/maxFrameHeight;
+    // adjust(windowWidth: number, windowHeight: number) {
+    //     // compare ratios - which window dimension, relative to an ideal frame, is smaller?
+    //     const windowtoMaxFrameX = windowWidth/maxFrameWidth;
+    //     const windowtoMaxFrameY = windowHeight/maxFrameHeight;
 
-        if (windowtoMaxFrameX < windowtoMaxFrameY) {
-            // if window width is comparatively smaller, we fit the height first
-            this.height = windowHeight;
-            this.width = this.height * maxFrameWidth/maxFrameHeight;
-            this.toPixels = windowWidth/maxFrameWidth;
-        } else {
-            // if window height is comparatively smaller, we fit the width first
-            this.width = windowWidth;
-            this.height = this.width * maxFrameHeight/maxFrameWidth;            
-            this.toPixels = windowHeight/maxFrameHeight;
-        }
-    }
+    //     if (windowtoMaxFrameX < windowtoMaxFrameY) {
+    //         // if window width is comparatively smaller, we fit the height first
+    //         this.height = windowHeight;
+    //         this.width = this.height * maxFrameWidth/maxFrameHeight;
+    //         this.toPixels = windowWidth/maxFrameWidth;
+    //     } else {
+    //         // if window height is comparatively smaller, we fit the width first
+    //         this.width = windowWidth;
+    //         this.height = this.width * maxFrameHeight/maxFrameWidth;            
+    //         this.toPixels = windowHeight/maxFrameHeight;
+    //     }
+    // }
 }
 
 class Circle {
@@ -79,9 +79,10 @@ class Circle {
 
         ctx.fillStyle = this.color;
 
-        let [drawX, drawY] = worldPosToScreenPos(this.x, this.y, frame);
+        const [drawX, drawY] = worldPosToScreenPos(this.x, this.y, frame);
         ctx.beginPath();
-        ctx.arc(drawX, drawY, this.size*frame.toPixels, 0, Math.PI*2, false);
+        // ctx.arc(drawX, drawY, this.size*frame.toPixels, 0, Math.PI*2, false);
+        ctx.arc(drawX, drawY, this.size, 0, Math.PI*2, false);
         ctx.fill();
     }
 }
@@ -101,8 +102,8 @@ class Square {
 
     detectContact(circle: Circle): boolean {
         // get x/y distance
-        let distX = Math.abs(this.x + this.size/2 - circle.x);
-        let distY = Math.abs(this.y + this.size/2 - circle.y);
+        const distX = Math.abs(this.x + this.size/2 - circle.x);
+        const distY = Math.abs(this.y + this.size/2 - circle.y);
 
         // if distance is too large, there is no collision
         if (distX > this.size/2 + circle.size) return false;
@@ -113,16 +114,18 @@ class Square {
         if (distY <= this.size/2) return true;
 
         // check corner
-        let cornerDistance_sq = Math.pow(distX - this.size/2, 2) + Math.pow(distY - this.size/2, 2);
+        const cornerDistance_sq = Math.pow(distX - this.size/2, 2) + Math.pow(distY - this.size/2, 2);
         return cornerDistance_sq <= circle.size*circle.size;
     }
 
     draw(ctx: CanvasRenderingContext2D, frame: Frame) {
         ctx.fillStyle = this.color;
 
-        let [drawX, drawY] = worldPosToScreenPos(this.x, this.y, frame);
-        ctx.fillRect(drawX, drawY, this.size*frame.toPixels, this.size*frame.toPixels); // colored body
-        ctx.strokeRect(drawX, drawY, this.size*frame.toPixels, this.size*frame.toPixels); // border
+        const [drawX, drawY] = worldPosToScreenPos(this.x, this.y, frame);
+        // ctx.fillRect(drawX, drawY, this.size*frame.toPixels, this.size*frame.toPixels); // colored body
+        // ctx.strokeRect(drawX, drawY, this.size*frame.toPixels, this.size*frame.toPixels); // border
+        ctx.fillRect(drawX, drawY, this.size, this.size); // colored body
+        ctx.strokeRect(drawX, drawY, this.size, this.size); // border
     }
 }
 
@@ -133,8 +136,10 @@ class Square {
  * @param frame current viewing frame
  */
 function worldPosToScreenPos(x: number, y: number, frame: Frame) {
-    let screenX = (x - frame.x) * frame.toPixels;
-    let screenY = (y - frame.y) * frame.toPixels;
+    // const screenX = (x - frame.x) * frame.toPixels;
+    // const screenY = (y - frame.y) * frame.toPixels;
+    const screenX = (x - frame.x);
+    const screenY = (y - frame.y);
 
     return [screenX, screenY];
 }
@@ -181,13 +186,13 @@ function keyUpHandler(event: KeyboardEvent) {
    }
 }
 
-let frame = new Frame(frameWidth, frameHeight);
+// const frame = new Frame(frameWidth, frameHeight);
 
-window.addEventListener("resize", windowResizeHandler)
+// window.addEventListener("resize", windowResizeHandler)
 
-function windowResizeHandler(event: UIEvent) {
-    frame.adjust(window.innerWidth, window.innerHeight);
-}
+// function windowResizeHandler(event: UIEvent) {
+//     frame.adjust(window.innerWidth, window.innerHeight);
+// }
 
 function move(square: Square) {
     if (movingLeft && square.x > -worldWidth/2) {
@@ -216,7 +221,7 @@ function run(c: HTMLCanvasElement, ctx: CanvasRenderingContext2D, frame: Frame, 
     ctx.strokeRect(-worldWidth/2 - frame.x, -worldHeight/2 - frame.y, worldWidth, worldHeight); // draw border
 
     // display each circle
-    for (let circle of circles) {
+    for (const circle of circles) {
         circle.display(ctx, frame);
         if (square.detectContact(circle)) {
             square.color = circle.color;
@@ -235,29 +240,29 @@ function start() {
     c.height = window.innerHeight;
 
     if (!c.getContext || testCanvasSupportDisplay) {
-        let canvasSupport = document.getElementById("canvas-support");
+        const canvasSupport = document.getElementById("canvas-support");
         if (canvasSupport) {
             canvasSupport.style.display = "block";
         }
         return;
     }
 
-    let ctx: CanvasRenderingContext2D = c.getContext("2d") as CanvasRenderingContext2D;
+    const ctx: CanvasRenderingContext2D = c.getContext("2d") as CanvasRenderingContext2D;
     ctx.strokeStyle = "rgb(0 0 0)"; // only time we stroke it's black (square border & world border)
 
-    let frame = new Frame(frameWidth, frameHeight);
+    const frame = new Frame(frameWidth, frameHeight);
 
-    let square = new Square(0, 0, squareSize, "rgb(255, 255, 255)");
+    const square = new Square(0, 0, squareSize, "rgb(255, 255, 255)");
 
 
     // create circles with random x, y, size, color 
-    let circles = new Set<Circle>();
-    let numCircles = 50;
+    const circles = new Set<Circle>();
+    const numCircles = 50;
     for (let i = 0; i < numCircles; i++) {
-        let x = Math.random()*worldWidth - 0.5*worldWidth;
-        let y = Math.random()*worldHeight - 0.5*worldHeight;
-        let size = Math.random()*40 + 10;
-        let color = `rgb(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255})`
+        const x = Math.random()*worldWidth - 0.5*worldWidth;
+        const y = Math.random()*worldHeight - 0.5*worldHeight;
+        const size = Math.random()*40 + 10;
+        const color = `rgb(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255})`
 
         circles.add(new Circle(x, y, size, color));
     }
