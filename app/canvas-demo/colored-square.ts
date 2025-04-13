@@ -1,4 +1,6 @@
-let c: HTMLCanvasElement = document.getElementById("colored-square") as HTMLCanvasElement;
+const c: HTMLCanvasElement = document.getElementById("colored-square") as HTMLCanvasElement;
+let ctest = document.getElementById("canvas-support");
+console.log(ctest == null);
 const testCanvasSupportDisplay = false;
 
 // player should not be able to get a larger fov with a larger monitor - max frame width and frame height
@@ -227,6 +229,7 @@ function run(c: HTMLCanvasElement, ctx: CanvasRenderingContext2D, frame: Frame, 
 }
 
 function start() {
+    console.log("her");
     // set up canvas & context
     c.width = window.innerWidth;
     c.height = window.innerHeight;
@@ -262,5 +265,7 @@ function start() {
     run(c, ctx, frame, square, circles);
 }
 
-window.onload = start;
+// window.onload = start;
+start();
 
+export{};

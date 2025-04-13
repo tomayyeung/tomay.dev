@@ -123,9 +123,8 @@ function guess(tone: string) {
 }
 
 function playSound(tone: string) {
-    let audio_file: HTMLAudioElement;
     try {
-        audio_file = new Audio(`../../phreaking/sounds/${tone}.ogg`);
+        const audio_file = new Audio(`./sounds/${tone}.ogg`);
         audio_file.play();
     } catch (error) {
         console.log(error);
@@ -137,7 +136,7 @@ function moveProgressBar() {
     
     indicatorProgressBar = 1;
     let width = 1;
-    progressBarID = setInterval(() => {
+    progressBarID = window.setInterval(() => {
         if (width >= 100) {
             width = 0;
             closeIndicatorPopup();
@@ -195,9 +194,9 @@ for (let i = 0; i < 10; i++) {
 hardModeTones.push("mfkp");
 hardModeTones.push("mfst");
 
-hardModeTones.forEach((tone) => 
+for (let tone of hardModeTones) {
     document.getElementById(tone)!.addEventListener("click", () => toneButtonClick(tone))
-);
+}
 
 let NUM_TONES = tones.length;
 
@@ -246,3 +245,5 @@ let hardMode = false;
 const mfTonesElem = document.getElementById("mf-container");
 const hardSwitchElem = document.getElementById("hard-switch-checkbox");
 hardSwitchElem!.addEventListener("change", toggleHardMode);
+
+export {};

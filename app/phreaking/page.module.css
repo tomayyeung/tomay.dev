@@ -1,10 +1,10 @@
 /* general */
-html, body {
+#main {
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-align: center;
 }
 
-button {
+#main button {
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     cursor: pointer;
 }
@@ -13,14 +13,14 @@ button:disabled:hover {
     cursor: not-allowed;
 }
 
-#complete {
+.complete {
     font-size: xx-large;
     text-align: center;
     display: none;
 }
 
 /* info */
-#info {
+.info {
     text-align: right;
     padding: 1em;
     position: fixed;
@@ -28,12 +28,12 @@ button:disabled:hover {
     right: 0;
 }
 
-#info > p {
+.info > p {
     margin: 5pt;
 }
 
 /* correct/incorrect indicator */
-#indicator {
+.indicator {
     display: none;
     font-size: 32pt;
     border-radius: 10pt;
@@ -45,7 +45,7 @@ button:disabled:hover {
     overflow: hidden;
 }
 
-#indicator-button {
+.indicator-button {
     color: white;
     font-size: large;
     background: none;
@@ -58,12 +58,12 @@ button:disabled:hover {
     padding: 0;
 }
 
-#indicator-text {
+.indicator-text {
     color: white;
     margin: 0;
 }
 
-#indicator-progress-bar {
+.indicator-progress-bar {
     position: absolute;
     left: 0;
     bottom: -5px;
@@ -74,7 +74,7 @@ button:disabled:hover {
 }
 
 /* mode - I stole most this */
-#switches-container {
+.switches-container {
     position: absolute;
     top: 0;
 }
@@ -160,11 +160,11 @@ input:checked + .slider:before {
 }
 
 /* main quiz */
-#main-quiz {
+.main-quiz {
     padding: 1em;
 }
 
-#play-sound {
+.play-sound {
     background-color: rgb(0, 200, 0);
     font-size: xx-large;
     border-width: 2.5pt;
@@ -172,7 +172,7 @@ input:checked + .slider:before {
     padding: 5pt;
 }
 
-#play-sound:hover {
+.play-sound:hover {
     background-color: rgb(0, 180, 0);
 }
 
@@ -198,7 +198,7 @@ div.phone-button-row {
 }
 
 /* mf */
-div#mf-container {
+div.mf-container {
     display: none;
 }
 
@@ -281,18 +281,12 @@ div#dtmf {
 }
 
 @media only screen and (max-width: 600px) {
-    #info {
+    .info {
         position: initial;
         padding: 0;
     }
 
-    #info > p {
+    .info > p {
         text-align: center;
-    }
-
-    #mode-switch-container {
-        position: initial;
-        margin: auto;
-        width: fit-content;
     }
 }

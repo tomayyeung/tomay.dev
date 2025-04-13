@@ -4,7 +4,7 @@ html, body {
     overflow: hidden; /* hide scroll bar */
 }
 
-div#canvas-support {
+div.canvas-support {
     padding: 10px;
     font-size: 40pt;
     position: absolute;
