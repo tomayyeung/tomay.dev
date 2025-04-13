@@ -234,7 +234,6 @@ function run(c: HTMLCanvasElement, ctx: CanvasRenderingContext2D, frame: Frame, 
 }
 
 function start() {
-    console.log("her");
     // set up canvas & context
     c.width = window.innerWidth;
     c.height = window.innerHeight;

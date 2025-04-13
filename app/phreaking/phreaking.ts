@@ -1,4 +1,7 @@
 // misc helper -----
+
+import path from "path";
+
 /**
  * I stole this
  */
@@ -124,7 +127,7 @@ function guess(tone: string) {
 
 function playSound(tone: string) {
     try {
-        const audio_file = new Audio(`./sounds/${tone}.ogg`);
+        const audio_file = new Audio(path.join(process.cwd(), "sounds", `${tone}.ogg`));
         audio_file.play();
     } catch (error) {
         console.log(error);
