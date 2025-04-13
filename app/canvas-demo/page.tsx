@@ -7,6 +7,14 @@ import styles from "./page.module.css";
 export default function CanvasDemo() {
   useEffect(() => {
     import("./colored-square");
+
+    // disable scrolling
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
   }, []);
 
   return (

@@ -9,7 +9,7 @@
     cursor: pointer;
 }
 
-button:disabled:hover {
+#main button:disabled:hover {
     cursor: not-allowed;
 }
 
@@ -229,7 +229,7 @@ div#dtmf {
 }
 
 .dtmf-phone-button:disabled {
-    background-color: hsl(180, 25.5%, 70%);
+    background-color: hsl(180, 25.5%, 60%);
 }
 
 /* coin tones */
@@ -258,7 +258,7 @@ div#dtmf {
 }
 
 .coin-button:disabled {
-    background-color: hsl(0, 30%, 70%);
+    background-color: hsl(43, 74%, 71%);
 }
 
 /* other tones */
