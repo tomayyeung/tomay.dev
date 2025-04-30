@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 
 import { Platform, Door } from "./platformer-helper";
 import { loadKeybinds, startPlatformer } from "./platformer";
-import { redirect } from "next/dist/server/api-utils";
+// import { redirect } from "next/dist/server/api-utils";
 
 export function HomeGame() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
