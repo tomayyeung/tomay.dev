@@ -1,4 +1,10 @@
-import { Platform, Door, isColliding, doorCollision, Keybinds, defaultKeybinds, FPS } from "./platformer-helper";
+/**
+ * to address small screens: add scrolling or restrict to text mode on small screens
+ * 
+ * right wall should probably not be based on window size
+ */
+
+import { Platform, Door, isColliding, doorCollision, Keybinds, defaultKeybinds, FPS, Player } from "./platformer-helper";
 
 let keybinds: Keybinds = { ...defaultKeybinds };
 
@@ -18,23 +24,36 @@ export function loadKeybinds() {
   }
 }
 
+let prevHeight: number = 0;
+/**
+ * when window is resized vertically, things are still drawn relative to the top, meaning they will be hidden if the window is
+ * shortened enough. Address this by updating all y-values
+*/
+function refreshCanvasSize(canvas: HTMLCanvasElement, platforms?: Platform[], doors?: Door[], player?: Player) {
+  // update canvas size
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  // update y-values
+  if (platforms !== undefined) platforms.forEach(platform => platform.y += canvas.height - prevHeight);
+  if (doors !== undefined) doors.forEach(door => door.y += canvas.height - prevHeight);
+  if (player !== undefined) player.y += canvas.height - prevHeight;
+
+  prevHeight = canvas.height;
+}
+
 export function startPlatformer(
   canvas: HTMLCanvasElement, platformsList?: Platform[], doorsList?: Door[],
 ) {
-  const setCanvasSize = () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-
-  window.addEventListener('resize', setCanvasSize);
-
-  setCanvasSize();
-
+  // remove overflow - hide scroll bar
   const originalOverflow = document.body.style.overflow;
   document.body.style.overflow = "hidden";
 
+  // get context
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
+
+  refreshCanvasSize(canvas);
 
   // define constants
   const gravity = 0.5; // higher values make player fall faster
@@ -64,7 +83,7 @@ export function startPlatformer(
 
   const doors = doorsList ?? [];
 
-  const player = {
+  const player: Player = {
     x: 100,
     y: 100,
     width: 50,
@@ -74,6 +93,9 @@ export function startPlatformer(
     speed: 5,
     jumping: false,
   };
+
+  const updateCanvas = () => refreshCanvasSize(canvas, platforms, doors, player);
+  window.addEventListener('resize', updateCanvas);
 
   const keys = {
     left: false,
@@ -190,7 +212,7 @@ export function startPlatformer(
   return () => {
     window.removeEventListener('keydown', handleKeyDown);
     window.removeEventListener('keyup', handleKeyUp);
-    window.removeEventListener('resize', setCanvasSize);
+    window.removeEventListener('resize', updateCanvas);
     document.body.style.overflow = originalOverflow;
   };
 }

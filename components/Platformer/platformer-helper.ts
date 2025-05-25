@@ -13,6 +13,13 @@ export interface Door extends Rect {
   redirect: string;
 }
 
+export interface Player extends Rect {
+  vx: number,
+  vy: number,
+  speed: number,
+  jumping: boolean,
+}
+
 export function isColliding(a: Rect, b: Rect): boolean {
   return (
     a.x < b.x + b.width &&
@@ -39,3 +46,6 @@ export const defaultKeybinds = {
 };
 
 export const FPS = 60;
+
+export const WORLD_WIDTH = 1920;
+export const WORLD_HEIGHT = 1080;
