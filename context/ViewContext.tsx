@@ -9,7 +9,7 @@ type ViewContextType = {
   toggleViewMode: () => void;
 };
 
-const ViewContext = createContext<ViewContextType | null>(null);
+const ViewContext = createContext<ViewContextType | undefined>(undefined);
 
 export function ViewProvider({ children }: { children: ReactNode }) {
   const [viewMode, setViewMode] = useState<ViewMode>("game");
@@ -19,9 +19,9 @@ export function ViewProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <ViewContext value={{ viewMode, toggleViewMode }}>
+    <ViewContext.Provider value={{ viewMode, toggleViewMode }}>
       {children}
-    </ViewContext>
+    </ViewContext.Provider>
   );
 }
 

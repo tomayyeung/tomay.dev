@@ -4,7 +4,8 @@
  * right wall should probably not be based on window size
  */
 
-import { Platform, Door, isColliding, doorCollision, Keybinds, defaultKeybinds, FPS, Player } from "./platformer-helper";
+import { Platform, Door, isColliding, doorCollision, Keybinds, defaultKeybinds, FPS, Player, WORLD_WIDTH, WORLD_HEIGHT } from "./platformer-helper";
+import { Camera } from "@/context/CameraContext";
 
 let keybinds: Keybinds = { ...defaultKeybinds };
 
@@ -24,26 +25,11 @@ export function loadKeybinds() {
   }
 }
 
-let prevHeight: number = 0;
-/**
- * when window is resized vertically, things are still drawn relative to the top, meaning they will be hidden if the window is
- * shortened enough. Address this by updating all y-values
-*/
-function refreshCanvasSize(canvas: HTMLCanvasElement, platforms?: Platform[], doors?: Door[], player?: Player) {
-  // update canvas size
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  // update y-values
-  if (platforms !== undefined) platforms.forEach(platform => platform.y += canvas.height - prevHeight);
-  if (doors !== undefined) doors.forEach(door => door.y += canvas.height - prevHeight);
-  if (player !== undefined) player.y += canvas.height - prevHeight;
-
-  prevHeight = canvas.height;
-}
-
 export function startPlatformer(
-  canvas: HTMLCanvasElement, platformsList?: Platform[], doorsList?: Door[],
+  canvas: HTMLCanvasElement,
+  setCamera: (newCamera: Partial<Camera>) => void,
+  platformsList?: Platform[],
+  doorsList?: Door[]
 ) {
   // remove overflow - hide scroll bar
   const originalOverflow = document.body.style.overflow;
@@ -53,7 +39,11 @@ export function startPlatformer(
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
 
-  refreshCanvasSize(canvas);
+  const updateCanvas = () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  };
+  updateCanvas();
 
   // define constants
   const gravity = 0.5; // higher values make player fall faster
@@ -62,18 +52,16 @@ export function startPlatformer(
   const terminalVelocity = 20;
 
   /* 
-  * Coordinates of platforms and doors will be inputted by components with the origin at the bottom left corner
+  * Coordinates of platforms and doors will be inputted by components with the origin at the center bottom of world
   * This makes handling different screen sizes easier; big screens won't have to deal with having high platforms
   * As a result, these coordinates need to be adapted to HTML canvas coordinates
   */
-  platformsList?.forEach(platform => platform.y = canvas.height - platform.y);
-  doorsList?.forEach(door => door.y = canvas.height - door.y);
-
+  const WALL_SIZE = 200; // thickness of world walls
   const defaultPlatforms: Platform[] = [
-    { x: 0, y: canvas.height - 50, width: canvas.width, height: 50, type: 'solid' }, // floor
-    { x: -50, y: 0, width: 50, height: canvas.height, type: 'solid' }, // left wall
-    { x: canvas.width, y: 0, width: 50, height: canvas.height, type: 'solid' }, // right wall
-    { x: 0, y: 0, width: canvas.width, height: 50, type: 'solid' }, // ceiling
+    { x: -WORLD_WIDTH/2 - WALL_SIZE, y: 0, width: WORLD_WIDTH + WALL_SIZE*2, height: WALL_SIZE, type: 'solid' }, // floor
+    { x: -WORLD_WIDTH/2 - WALL_SIZE, y: -WORLD_HEIGHT - WALL_SIZE, width: WALL_SIZE, height: WORLD_HEIGHT + WALL_SIZE*2, type: 'solid' }, // left wall
+    { x: WORLD_WIDTH/2, y: -WORLD_HEIGHT - WALL_SIZE, width: WALL_SIZE, height: WORLD_HEIGHT + WALL_SIZE*2, type: 'solid' }, // right wall
+    { x: WORLD_WIDTH - WALL_SIZE, y: -WORLD_HEIGHT - WALL_SIZE, width: WORLD_WIDTH + WALL_SIZE*2, height: WALL_SIZE, type: 'solid' }, // ceiling
   ];
 
   const platforms: Platform[] = [
@@ -84,8 +72,8 @@ export function startPlatformer(
   const doors = doorsList ?? [];
 
   const player: Player = {
-    x: 100,
-    y: 100,
+    x: 0,
+    y: -500,
     width: 50,
     height: 50,
     vx: 0,
@@ -94,7 +82,6 @@ export function startPlatformer(
     jumping: false,
   };
 
-  const updateCanvas = () => refreshCanvasSize(canvas, platforms, doors, player);
   window.addEventListener('resize', updateCanvas);
 
   const keys = {
@@ -159,8 +146,7 @@ export function startPlatformer(
     platforms.forEach(platform => {
       // Player is falling down onto platform - this applies to both solid and one-way platforms
       if (
-        // player.y + player.height + player.vy * deltaTime >= platform.y && // Bottom of player below top of platform
-        // player.y < platform.y && // Top of player above top of platform (to ensure it's a collision from the top)
+        // player.y + player.vy*deltaTime + player.height <= platform.y && // Player is above platform
         player.vy > 0 && // Player is falling
         isColliding(player, platform)
       ) {
@@ -188,21 +174,25 @@ export function startPlatformer(
       }
     });
 
-    // Draw platforms, doors, player
+    // Draw platforms, doors, player centered on player
+    const camX = player.x + player.width/2 - canvas.width/2; // centered horizontally
+    const camY = player.y - canvas.height * 3/5; // ~3/5ths down vertically
+    setCamera({ x: camX,  y: camY });
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     platforms.forEach(platform => {
       ctx.fillStyle = '#444';
-      ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
+      ctx.fillRect(platform.x - camX, platform.y - camY, platform.width, platform.height);
     });
 
     doors.forEach(door => {
       ctx.fillStyle = '#0f0';
-      ctx.fillRect(door.x, door.y, door.width, door.height);
+      ctx.fillRect(door.x - camX, door.y - camY, door.width, door.height);
     });
 
     ctx.fillStyle = '#f24';
-    ctx.fillRect(player.x, player.y, player.width, player.height);
+    ctx.fillRect(player.x - camX, player.y - camY, player.width, player.height);
 
     requestAnimationFrame(update);
   };

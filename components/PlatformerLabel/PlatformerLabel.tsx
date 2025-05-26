@@ -1,3 +1,4 @@
+import { useCamera } from "@/context/CameraContext";
 import styles from "./PlatformerLabel.module.css"
 
 export interface Label {
@@ -19,37 +20,37 @@ export enum Alignment {
 };
 
 /**
- * As our platformer uses the bottom left corner as the origin, labels' y positions will be measured from the bottom;
- * i.e. all labels will have left: label.x, bottom: label.y;
- * the transform property will be how we align
+ * @param label x, y are world coordinates, not screen coordinates
  */
 export function PlatformerLabel({ label, alignment }: { label: Label, alignment: Alignment }) {
   let transform = "";
   switch (alignment) {
     case Alignment.TopLeft:
-      transform = "translateY(100%)";
       break;
     case Alignment.TopRight:
-      transform = "translateX(-100%) translateY(100%)";
-      break;
-    case Alignment.BottomLeft:
-      break;
-    case Alignment.BottomRight:
       transform = "translateX(-100%)";
       break;
+    case Alignment.BottomLeft:
+      transform = "translateY(-100%)"
+      break;
+    case Alignment.BottomRight:
+      transform = "translateX(-100%) translateY(100%)";
+      break;
     case Alignment.CenterTop:
-      transform = "translateX(-50%) translateY(100%)";
+      transform = "translateX(-50%)";
       break;
     case Alignment.CenterLeft:
-      transform = "translateY(50%)";
+      transform = "translateY(-50%)";
       break;
     case Alignment.CenterRight:
-      transform = "translateX(-100%) translateY(50%)";
+      transform = "translateX(-100%) translateY(-50%)";
       break;
     case Alignment.CenterBottom:
-      transform = "translateX(-50%)";
+      transform = "translateX(-50%) translateY(-100%)";
       break;
   }
 
-  return <div className={styles.label} style={{left: label.x, bottom: label.y, transform: transform}}>{label.text}</div>
+  const { camera } = useCamera();
+
+  return <div className={styles.label} style={{ left: label.x - camera.x, top: label.y - camera.y, transform }}>{label.text}</div>
 }
