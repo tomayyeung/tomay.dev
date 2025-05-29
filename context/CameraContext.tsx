@@ -28,7 +28,7 @@ export function CameraProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const resetCamera = useCallback(() => {
-    setCameraState({ x: 0, y: 0 });
+    setCameraState(defaultCamera);
   }, []);
 
   return (

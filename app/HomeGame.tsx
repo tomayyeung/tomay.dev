@@ -6,6 +6,8 @@ export function HomeGame() {
   return (
     <CameraProvider>
       <Platformer
+      player = {{ x: 0, y: -500, width: 50, height: 50, speed: 5,
+      }}
       platforms={[
         { x: -200, y: -180, width: 150, height: 20, type: 'oneWay' },
         { x: 50, y: -125, width: 100, height: 20, type: 'oneWay' },
