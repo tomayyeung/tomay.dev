@@ -89,7 +89,7 @@ export function startPlatformer(
   requestAnimationFrame(update);
 
   return () => {
-    console.log("cleanup");
+    // console.log("cleanup");
     window.removeEventListener('keydown', handleKeyDown);
     window.removeEventListener('keyup', handleKeyUp);
     window.removeEventListener('resize', updateCanvas);

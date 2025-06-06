@@ -52,5 +52,11 @@ export function PlatformerLabel({ label, alignment }: { label: Label, alignment:
 
   const { camera } = useCamera();
 
-  return <div className={styles.label} style={{ left: label.x - camera.x, top: label.y - camera.y, transform }}>{label.text}</div>
+  return (
+    <div
+    className={styles.label} 
+    style={{ left: label.x - camera.x, top: label.y - camera.y, transform }}>
+      {label.text}
+    </div>
+  );
 }

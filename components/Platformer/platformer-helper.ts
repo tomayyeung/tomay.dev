@@ -49,7 +49,7 @@ export type Keybinds = {
 export const defaultKeybinds = {
   left: 'ArrowLeft',
   right: 'ArrowRight',
-  jump: ' ',
+  jump: 'ArrowUp',
 };
 
 type Keypresses = {
