@@ -1,0 +1,65 @@
+.section {
+    margin-bottom: 70px;
+}
+
+.header {
+    padding: 0.5em 0;
+    border-bottom: solid var(--primary) 3px;
+    position: relative;
+}
+
+.name {
+    display: inline;
+}
+
+.copy {
+    font-family: inherit;
+    position: relative;
+    display: inline-block;
+    background: none;
+    border: none;
+    /* color: white; */
+    position: absolute;
+    right: 0;
+    color: white;
+    /* background-color: white; */
+}
+
+.copy:hover {
+    cursor: pointer;
+}
+
+.copy .tooltip {
+    visibility: hidden;
+    width: auto;
+    bottom: 110%;
+    left: 50%;
+    /* margin: 5px; */
+    /* margin-left: -125px; */
+    transform: translateX(-50%);
+    background-color: var(--secondary-bg);
+    border: 1px solid white;
+    /* color: #fff; */
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+    position: absolute;
+    text-wrap-mode: nowrap;
+    text-decoration: underline;
+}
+
+.link {
+    margin: 5px;
+    color: white;
+    /* position: absolute;
+    right: 0; */
+}
+
+.copy:hover .tooltip {
+    visibility: visible;
+}
+
+.desc {
+    padding: 0.5em 0;
+    border-top: solid var(--primary) 3px;
+}

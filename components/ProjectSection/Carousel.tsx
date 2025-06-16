@@ -20,7 +20,7 @@ const aspectRatio = 16 / 9;
 const imgHeight = imgWidth / aspectRatio, focusedImgHeight = focusedImgWidth / aspectRatio; // max heights based on aspect ratio
 const focusedImgScale = focusedImgWidth / imgWidth;
 
-export default function Carousel({ images }: { images: string[] }) {
+export default function Carousel({ images, captions }: { images: string[], captions: string[] }) {
   const trackRef = useRef<HTMLDivElement | null>(null);
   const imageContainerRefs = useRef<(HTMLDivElement | null)[]>([]);
   const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
@@ -87,9 +87,9 @@ export default function Carousel({ images }: { images: string[] }) {
     <div className={styles.carousel}>
       <div className={styles.imageTrack} ref={trackRef}>
         {images.map((src, index) => 
+          <div key={index} className={styles.trackItem}>
             <div
               className={`${styles.imgContainer} ${index === currIndex ? styles.focusedImg : ''}`}
-              key={index}
               ref={(el) => {imageContainerRefs.current[index] = el}}
               >
               <Image
@@ -131,20 +131,21 @@ export default function Carousel({ images }: { images: string[] }) {
                 }}
                 />
               </div>
+            <div className={styles.caption}>{captions[index]}</div>
+          </div>
         )}
       </div>
 
-      <button
-        className={styles.arrow}
-        style={{ left: 0 }}
-        onClick={ () => setIndex((currIndex - 1 + numImages) % numImages) }>
-          &lt;
+      <button className={styles.button} style={{ left: 0 }} onClick={ () => setIndex((currIndex - 1 + numImages) % numImages) }>
+        <svg viewBox="0 0 24 24">
+          <path d="M16 4L8 12L16 20" />
+        </svg>
       </button>
-      <button
-        className={styles.arrow}
-        style={{ right: 0 }}
-        onClick={ () => setIndex((currIndex + 1) % numImages) }>
-          &gt;
+
+      <button className={styles.button} style={{ right: 0 }} onClick={ () => setIndex((currIndex + 1) % numImages) }>
+        <svg viewBox="0 0 24 24">
+          <path d="M8 4L16 12L8 20" />
+        </svg>
       </button>
     </div>
   );
