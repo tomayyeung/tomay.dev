@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 type ViewMode = "game" | "text";
 
@@ -11,7 +11,7 @@ type ViewContextType = {
 
 const ViewContext = createContext<ViewContextType | undefined>(undefined);
 
-export function ViewProvider({ children }: { children: ReactNode }) {
+export function ViewProvider({ children }: { children: React.ReactNode }) {
   const [viewMode, setViewMode] = useState<ViewMode>("game");
 
   const toggleViewMode = () => {

@@ -7,6 +7,9 @@ import { Door, Platform, PlayerStats } from "@/components/Platformer/platformer-
 import { loadKeybinds, startPlatformer } from "@/components/Platformer/platformer-game";
 import { useCamera } from "@/context/CameraContext";
 
+/**
+ * Platformer game, creates canvas and game logic
+ */
 export function Platformer({ player, platforms, doors } : { player: PlayerStats, platforms: Platform[], doors: Door[] }) {
   const { setCamera } = useCamera();
   const canvasRef = useRef<HTMLCanvasElement>(null);

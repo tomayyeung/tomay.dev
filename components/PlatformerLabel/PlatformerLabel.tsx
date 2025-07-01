@@ -1,13 +1,6 @@
-import { useCamera } from "@/context/CameraContext";
+import { Camera } from "@/context/CameraContext";
 import styles from "./PlatformerLabel.module.css"
 
-export interface Label {
-  x: number,
-  y: number,
-  text: string,
-};
-
-// where the label is aligned to
 export enum Alignment {
   TopLeft,
   TopRight,
@@ -19,12 +12,19 @@ export enum Alignment {
   CenterBottom,
 };
 
+export interface Label {
+  x: number,
+  y: number,
+  text: string,
+  align: Alignment
+};
+
 /**
  * @param label x, y are world coordinates, not screen coordinates
  */
-export function PlatformerLabel({ label, alignment }: { label: Label, alignment: Alignment }) {
+export function PlatformerLabel({ label, camera }: { label: Label, camera: Camera }) {
   let transform = "";
-  switch (alignment) {
+  switch (label.align) {
     case Alignment.TopLeft:
       break;
     case Alignment.TopRight:
@@ -49,8 +49,6 @@ export function PlatformerLabel({ label, alignment }: { label: Label, alignment:
       transform = "translateX(-50%) translateY(-100%)";
       break;
   }
-
-  const { camera } = useCamera();
 
   return (
     <div

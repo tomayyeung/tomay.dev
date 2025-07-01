@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, ReactNode, useContext, useState, useCallback } from "react";
+import { createContext, useContext, useState, useCallback } from "react";
 
 export interface Camera {
   x: number;
@@ -20,7 +20,7 @@ const defaultCamera: Camera = {
 
 const CameraContext = createContext<CameraContextValue | undefined>(undefined);
 
-export function CameraProvider({ children }: { children: ReactNode }) {
+export function CameraProvider({ children }: { children: React.ReactNode }) {
   const [camera, setCameraState] = useState<Camera>(defaultCamera);
 
   const setCamera = useCallback((newCamera: Partial<Camera>) => {

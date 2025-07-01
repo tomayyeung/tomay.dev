@@ -1,5 +1,8 @@
 .label {
     position: absolute;
     font-size: x-large;
-    text-shadow: 0 0 5px white;
+    /* text-shadow: 0 0 5px white; */
+    border: 3px dashed white;
+    padding: 0.3em;
+    filter: drop-shadow(0 0 1px black) drop-shadow(0 0 2px white) drop-shadow(0 0 2px black);
 }
