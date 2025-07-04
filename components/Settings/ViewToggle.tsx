@@ -3,17 +3,18 @@
 import { usePathname } from "next/navigation";
 
 import { useView } from "@/context/ViewContext";
+import { Toggle } from "./Toggle";
+
+// import styles from "./ViewToggle.module.css"
 
 export function ViewToggle() {
-  const { viewMode, toggleViewMode } = useView();
+  const { toggleViewMode } = useView();
 
   const pathname = usePathname();
   const hideOn = ["/phreaking", "/canvas-demo"];
-  if (hideOn.includes(pathname)) return null;
+  if (hideOn.includes(pathname)) return <></>;
 
   return (
-    <button onClick={toggleViewMode}>
-      Switch view mode to {viewMode === "game" ? "text" : "game"}
-    </button>
-  )
+    <Toggle name="View" left="Game" leftColor="#cdc" right="Text" rightColor="#343" func={toggleViewMode}/>
+  );
 }

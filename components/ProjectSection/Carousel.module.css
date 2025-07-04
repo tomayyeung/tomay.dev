@@ -81,5 +81,5 @@
 }
 
 .button:hover svg {
-    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.3)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.2));
+    filter: drop-shadow(0 0 1px black) drop-shadow(0 0 1px black) drop-shadow(0 0 2px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.3)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.2));
 }

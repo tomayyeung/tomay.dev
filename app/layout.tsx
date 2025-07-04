@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 
-import { ViewProvider } from "@/context/ViewContext";
-import { Settings } from "@/components/Settings";
+// import { ViewProvider } from "@/context/ViewContext";
+// import { Settings } from "@/components/Settings";
 
 import "./globals.css";
 
@@ -25,10 +25,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${lato.className}`}>
-        <ViewProvider>
-          <Settings />
+        {/* <ViewProvider>
           {children}
-        </ViewProvider>
+          <Settings />
+        </ViewProvider> */}
+        {children}
       </body>
     </html>
   );

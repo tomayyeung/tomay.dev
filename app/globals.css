@@ -1,9 +1,8 @@
 :root {
-  --primary: white;
-  --background: #111;
+  --primary: #ddd;
+  --background: #222;
   --secondary-bg: #333;
 }
-
 
 body {
   margin: 0;

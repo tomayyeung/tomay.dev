@@ -1,8 +1,8 @@
 "use client";
 
-import { useView } from "@/context/ViewContext";
+// import { useView } from "@/context/ViewContext";
 import { Project } from "./page";
-import ProjectsGame from "./ProjectsGame";
+// import ProjectsGame from "./ProjectsGame";
 import ProjectsText from "./ProjectsText";
 
 export type ProjectsProps = {
@@ -11,8 +11,9 @@ export type ProjectsProps = {
 }
 
 export function ProjectsPage({ projects, images }: ProjectsProps) {
-  const { viewMode } = useView();
-  return viewMode === "game" ?
-    <ProjectsGame projects={projects} images={images}/> :
-    <ProjectsText projects={projects} images={images}/>;
+  // const { viewMode } = useView();
+  // return viewMode === "game" ?
+  //   <ProjectsGame projects={projects} images={images}/> :
+  //   <ProjectsText projects={projects} images={images}/>;
+  return <ProjectsText projects={projects} images={images}/>;
 }
