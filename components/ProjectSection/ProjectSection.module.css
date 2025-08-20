@@ -6,57 +6,34 @@
     padding: 0.5em 0;
     border-bottom: solid var(--primary) 3px;
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 .name {
-    display: inline;
+    margin: 0;
+    display: block;
 }
 
-.copy {
-    font-family: inherit;
-    position: relative;
-    display: inline-block;
-    background: none;
-    border: none;
-    /* color: white; */
-    position: absolute;
-    right: 0;
-    color: white;
-    /* background-color: white; */
-}
-
-.copy:hover {
-    cursor: pointer;
-}
-
-.copy .tooltip {
-    visibility: hidden;
-    width: auto;
-    bottom: 110%;
-    left: 50%;
-    /* margin: 5px; */
-    /* margin-left: -125px; */
-    transform: translateX(-50%);
-    background-color: var(--secondary-bg);
-    border: 1px solid white;
-    /* color: #fff; */
-    text-align: center;
-    padding: 5px;
-    border-radius: 6px;
-    position: absolute;
-    text-wrap-mode: nowrap;
-    text-decoration: underline;
+.links {
+    display: flex;
+    gap: 5px;
 }
 
 .link {
-    margin: 5px;
+    /* margin: 5px; */
     color: white;
-    /* position: absolute;
-    right: 0; */
 }
 
-.copy:hover .tooltip {
-    visibility: visible;
+.icon {
+    display: block;
+    transition: all 0.3s;
+}
+
+.icon:hover {
+    filter: brightness(60%);
 }
 
 .desc {

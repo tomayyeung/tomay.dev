@@ -11,12 +11,17 @@ export function ProjectSection({ project, images }: { project: Project, images: 
       <div className={styles.header}>
         <h3 className={styles.name}>{project.name}</h3>
 
-        <Link className={styles.link} href={project.link} target="_blank">
-          <button className={styles.copy}>
-            <Image src="github.svg" alt="GitHub logo" width={22} height={22}/>
-            <span id="tooltip" className={styles.tooltip}>{project.link}</span>
-          </button>
-        </Link>
+        <div className={styles.links}>
+          {project.link && 
+            <Link className={styles.link} href={project.link} target="_blank">
+                <Image className={styles.icon} src="icons/link.svg" alt="Link" width={22} height={22}/>
+            </Link>
+          }
+
+          <Link className={styles.link} href={project.repo} target="_blank">
+              <Image className={styles.icon} src="icons/github.svg" alt="GitHub logo" width={22} height={22}/>
+          </Link>
+        </div>
       </div>
 
       <Carousel images={images} captions={project.captions}/>

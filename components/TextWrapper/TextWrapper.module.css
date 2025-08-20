@@ -5,3 +5,51 @@
     width: 100%;
     box-sizing: border-box;
 }
+
+.header {
+    background-color: var(--secondary-bg);
+    /* font-size: larger; */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 8px;
+    text-align: center;
+    /* display: flex; */
+    /* justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box; */
+}
+
+.footer {
+    background-color: var(--secondary-bg);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.right {
+    /* margin: 10px; */
+    /* position:fixed; */
+    /* right: 0; */
+    display: flex;
+    /* flex: 0 0 auto; */
+    gap: 8px;
+    
+    /* align-items: center; */
+    /* float:right; */
+}
+
+.social {
+    display: block;
+    transition: all 0.3s;
+}
+
+.social:hover {
+    filter: brightness(60%);
+    cursor: pointer;
+}
