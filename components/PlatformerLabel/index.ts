@@ -1,1 +1,0 @@
-export { Alignment, PlatformerLabel } from "./PlatformerLabel";

@@ -1,6 +1,7 @@
 import path from "path";
 import fs from "fs/promises"
-import { ProjectsPage } from "./ProjectsPage";
+
+import { ProjectSection } from "@/components/ProjectSection";
 
 export interface Project {
   name: string,
@@ -106,5 +107,18 @@ async function getImages() {
 
 export default async function Projects() {
   const images = await getImages();
-  return <ProjectsPage projects={projects} images={images} />;
+
+  return (
+    <>
+      <h1>Projects</h1>
+      {projects.map((project, index) => {
+        return (
+          <ProjectSection
+            key={index}
+            project={project}
+            images={images.filter((path) => path.split("/").at(-2) === project.folder)} // -2 for proj directory
+          />);
+      })}
+    </>
+  )
 }
