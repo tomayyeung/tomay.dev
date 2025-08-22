@@ -1,0 +1,12 @@
+.link {
+    color: inherit;
+}
+
+.update {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: smaller;
+    background-color: var(--background);
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 0.4em;
+}

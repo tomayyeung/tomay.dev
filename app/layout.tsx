@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Lato } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 
+import { UpdateDisplay } from "@/components/UpdateDisplay";
+
+import { Lato } from "next/font/google";
 import "./globals.css";
 
 const lato = Lato({
@@ -21,7 +23,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const commitDate = process.env.VERCEL_GIT_COMMIT_DATE;
 
   return (
     <html lang="en">
@@ -43,7 +44,8 @@ export default function RootLayout({
         {/* Footer */}
         <div className="footer">
           <div className="footer-left">Thomas Yeung</div>
-          <div>Last updated: {commitDate ? new Date(commitDate).toDateString() : "Unknown"}</div>
+
+          <UpdateDisplay />
 
           <div className="footer-right">
             <Link className="footer-link" href="https://github.com/tomayyeung" target="_blank">
