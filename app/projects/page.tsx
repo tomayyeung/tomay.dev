@@ -1,7 +1,10 @@
 import path from "path";
 import fs from "fs/promises"
+import Link from "next/link";
 
 import { ProjectSection } from "@/components/ProjectSection";
+
+import styles from "./page.module.css";
 
 export interface Project {
   name: string,
@@ -110,7 +113,8 @@ export default async function Projects() {
 
   return (
     <>
-      <h1>Projects</h1>
+      <Link className={styles.back} href={"/"}>← Back to Home</Link>
+      <h1 className={styles.h1}>Projects</h1>
       {projects.map((project, index) => {
         return (
           <ProjectSection

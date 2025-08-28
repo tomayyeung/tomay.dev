@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import localFont from "next/font/local";
 
 import { UpdateDisplay } from "@/components/UpdateDisplay";
 
@@ -10,6 +11,11 @@ import "./globals.css";
 const lato = Lato({
   weight: "400",
   subsets: ["latin"],
+});
+
+const menlo = localFont({
+  src: "../public/fonts/Menlo.ttf",
+  variable: "--font-menlo",
 });
 
 export const metadata: Metadata = {
@@ -23,23 +29,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-
   return (
     <html lang="en">
-      <body className={`${lato.className}`}>
+      <body className={`${lato.className} ${menlo.variable}`}>
         {/* Background */}
 
         {/* Body */}
         <div className="body">
           {children}
         </div>
-
-        {/* Header */}
-        {/* <div className={styles.header}>
-          <div>
-            updated 4/5
-          </div>
-        </div> */}
 
         {/* Footer */}
         <div className="footer">

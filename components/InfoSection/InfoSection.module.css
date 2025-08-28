@@ -1,0 +1,27 @@
+.section {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  gap: 16px;
+  margin-bottom: 85px;
+}
+
+.left {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.right {
+  flex-shrink: 0;
+}
+
+.image {
+  display: block;
+  max-width: 350px;
+  max-height: 400px;
+  width: auto;
+  height: auto;
+  border: 2px solid var(--primary);
+}

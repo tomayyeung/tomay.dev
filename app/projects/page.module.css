@@ -1,19 +1,24 @@
-.link {
-  color: inherit;
+.back {
+  color: var(--primary);
   text-decoration: none;
   position: relative;
+  padding-bottom: 5px;
 }
 
-.link::after {
+.back::after {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
-  border-bottom: 1px solid var(--primary);
   width: 0;
+  border-bottom: 2px solid var(--primary);
   transition: all 0.3s ease;
 }
 
-.link:hover::after {
+.back:hover::after {
   width: 100%;
+}
+
+.h1 {
+  margin-top: 40px;
 }

@@ -7,7 +7,7 @@ import styles from "./ProjectSection.module.css"
 
 export function ProjectSection({ project, images }: { project: Project, images: string[] }) {
   return (
-    <div className={styles.section}>
+    <div className={`${styles.section} float`}>
       <div className={styles.header}>
         <h3 className={styles.name}>{project.name}</h3>
 
