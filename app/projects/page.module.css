@@ -1,11 +1,11 @@
 .back {
-  color: var(--primary);
+  /* color: var(--primary);
   text-decoration: none;
-  position: relative;
+  position: relative; */
   padding-bottom: 5px;
 }
 
-.back::after {
+/* .back::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -17,7 +17,7 @@
 
 .back:hover::after {
   width: 100%;
-}
+} */
 
 .h1 {
   margin-top: 40px;

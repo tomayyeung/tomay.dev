@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 
 import styles from "./page.module.css";
+import { BackButton } from "@/components/BackButton";
 
 export default function CanvasDemo() {
   useEffect(() => {
@@ -19,6 +20,7 @@ export default function CanvasDemo() {
 
   return (
     <>
+      <BackButton />
       <div id="canvas-support" className={styles["canvas-support"]}>Sorry, your browser does not support HTML canvas.</div>
       <canvas id="colored-square"></canvas>
     </>

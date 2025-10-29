@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 
 import styles from "./page.module.css";
+import { BackButton } from '@/components/BackButton';
 
 export default function Phreaking() {
   useEffect(() => {
@@ -10,6 +11,8 @@ export default function Phreaking() {
   }, []);
 
   return (
+    <>
+    <BackButton />
     <div id={styles.main}>
       <h1>Phreaking Quiz</h1>
 
@@ -126,5 +129,7 @@ export default function Phreaking() {
         Your total incorrect guesses: </p>
 
     </div>
+
+    </>
   )
 }

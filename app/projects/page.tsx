@@ -1,10 +1,10 @@
 import path from "path";
 import fs from "fs/promises"
-import Link from "next/link";
 
 import { ProjectSection } from "@/components/ProjectSection";
 
 import styles from "./page.module.css";
+import { BackButton } from "@/components/BackButton";
 
 export interface Project {
   name: string,
@@ -84,7 +84,7 @@ const projects: Project[] = [
       spawn around the map and provide experience for the player to level up.",
       "Though the game is singleplayer, a leaderboard tracks fastest laps completed globally.",
       "Tech Stack: HTML, CSS, TypeScript, Firebase",
-      "This project won first place at the 2025 BLOOM hackathon."
+      "This project won first place at the 2025 BLOOM hackathon!"
     ],
     repo: "https://github.com/nishoof/crts",
     link: "https://crts.nishilanand.com/",
@@ -113,7 +113,8 @@ export default async function Projects() {
 
   return (
     <>
-      <Link className={styles.back} href={"/"}>← Back to Home</Link>
+      {/* <Link className={`internal-link ${styles.back}`} href={"/"}>← Back to Home</Link> */}
+      <BackButton page />
       <h1 className={styles.h1}>Projects</h1>
       {projects.map((project, index) => {
         return (

@@ -2,33 +2,11 @@
   transform: translateY(-10px);
 }
 
-.li {
-  padding-left: 20px;
-}
-
-.li::marker {
-  margin-left: 20px;
-  margin-right: 0.1em;
-}
-
 .projectsLink {
-  color: var(--primary);
-  text-decoration: none;
-  position: relative;
   background-color: var(--secondary-bg);
   padding: 8px;
 }
 
-.projectsLink::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  border-bottom: 2px solid var(--primary);
-  transition: all 0.3s ease;
-}
-
-.projectsLink:hover::after {
-  width: 100%;
+.miscLink {
+  padding-bottom: 3px;
 }

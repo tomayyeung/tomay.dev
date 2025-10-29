@@ -1,9 +1,10 @@
 :root {
   --primary: #ddd;
+  --secondary: #aaa;
   --background: #222;
   --secondary-bg: #333;
 
-  --float-dur: 0.6s
+  --float-dur: 0.5s;
 }
 
 .float:nth-child(1) { animation-delay: 0s; }
@@ -41,10 +42,22 @@ h1 {
   margin-top: 80px;
 }
 
+h3 {
+  margin: 10px 0;
+}
+
+ul {
+  margin: 10px 0;
+}
+
+li {
+  padding-bottom: 4px;
+}
+
 .body {
   max-width: 800px;
   margin: 0 auto;
-  /* padding: 0 20px; */
+  margin-bottom: 90px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -92,4 +105,32 @@ code {
   border: 1px solid white;
   border-radius: 5px;
   padding: 0.4em;
+}
+
+.internal-link {
+  color: var(--primary);
+  text-decoration: none;
+  position: relative;
+}
+
+.internal-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  border-bottom: 2px solid var(--primary);
+  transition: all 0.3s ease;
+}
+
+.internal-link:hover::after {
+  width: 100%;
+}
+
+.external-link {
+  color: var(--primary);
+}
+
+.external-link:visited {
+  color: var(--secondary);
 }
