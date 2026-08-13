@@ -4,3 +4,5 @@ allowBuilds:
 onlyBuiltDependencies:
   - sharp
   - unrs-resolver
+packages:
+  - "."
