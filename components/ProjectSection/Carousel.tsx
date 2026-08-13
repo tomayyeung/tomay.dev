@@ -100,7 +100,7 @@ export default function Carousel({ images, captions }: { images: string[], capti
                 src={src}
                 alt=""
                 fill
-                sizes=""
+                sizes="(max-width: 640px) 90vw, (max-width: 1024px) 550px, 550px"
                 onLoad={(e) => {
                   const container = imageContainerRefs.current[index];
                   if (!container) return;
