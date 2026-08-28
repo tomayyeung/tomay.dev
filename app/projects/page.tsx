@@ -8,7 +8,7 @@ import { BackButton } from "@/components/BackButton";
 
 export interface Project {
   name: string;
-  folder: string; // images are got from @/public/project_images/{folder}
+  dir: string; // images are got from @/public/project_images/{dir}
   captions: string[]; // Depending on image size, these need to be limited in length
   description: string[];
   repo: string; // link to repo
@@ -18,7 +18,7 @@ export interface Project {
 const projects: Project[] = [
   {
     name: "@groq is this true?",
-    folder: "groq_is_this_true",
+    dir: "groq_is_this_true",
     captions: [
       "Fact checking an article",
       "AI image detection",
@@ -33,7 +33,7 @@ const projects: Project[] = [
   },
   {
     name: "Newsflash",
-    folder: "newsflash",
+    dir: "newsflash",
     captions: [
       "Home page with preferences",
       "Selecting some preferences",
@@ -49,7 +49,7 @@ const projects: Project[] = [
   },
   {
     name: "creg CLI",
-    folder: "creg_cli",
+    dir: "creg_cli",
     captions: [
       "Craig, mascot of creg",
       "Help manual",
@@ -74,7 +74,7 @@ const projects: Project[] = [
   },
   {
     name: "creg Website",
-    folder: "creg_web",
+    dir: "creg_web",
     captions: ["Home page, with AI chatbot open", ""],
     description: [
       "A two-part project with a separate CLI aspect to aid course registration at USF. The website is targeted \
@@ -88,7 +88,7 @@ const projects: Project[] = [
   },
   {
     name: "crts.io",
-    folder: "crts",
+    dir: "crts",
     captions: [
       "Main menu",
       "Loaded in / Global leaderboard",
@@ -133,7 +133,6 @@ export default async function Projects() {
 
   return (
     <>
-      {/* <Link className={`internal-link ${styles.back}`} href={"/"}>← Back to Home</Link> */}
       <BackButton page />
       <h1 className={styles.h1}>Projects</h1>
       {projects.map((project, index) => {
@@ -142,7 +141,7 @@ export default async function Projects() {
             key={index}
             project={project}
             images={images.filter(
-              (path) => path.split("/").at(-2) === project.folder,
+              (path) => path.split("/").at(-2) === project.dir,
             )} // -2 for proj directory
           />
         );
