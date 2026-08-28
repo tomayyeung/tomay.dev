@@ -1,12 +1,84 @@
+.home {
+  padding-top: 24px;
+}
+
+.intro {
+  max-width: 620px;
+}
+
+.intro h1 {
+  margin: 0 0 20px;
+  font-size: clamp(2.4rem, 7vw, 4rem);
+  line-height: 1.05;
+}
+
+.lede {
+  max-width: 52ch;
+  margin: 0 0 12px;
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+
+.placeholder {
+  max-width: 52ch;
+  margin: 0 0 28px;
+  color: var(--secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.interestsLabel {
+  margin-bottom: 8px;
+}
+
 .ul {
-  transform: translateY(-10px);
+  margin-top: 0;
+  padding-left: 1.2em;
+}
+
+.projectsCallout {
+  margin: 62px 0 76px;
+  padding: 18px 0;
+  border-top: 1px solid var(--secondary);
+  border-bottom: 1px solid var(--secondary);
 }
 
 .projectsLink {
-  background-color: var(--secondary-bg);
-  padding: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.sectionHeading {
+  font-size: 1.6rem;
+}
+
+.misc {
+  margin-top: 12px;
+}
+
+.misc h2 {
+  margin: 28px 0 20px;
+  font-size: 1.6rem;
+}
+
+.rule {
+  border-top: 1px solid var(--secondary);
 }
 
 .miscLink {
   padding-bottom: 3px;
+}
+
+@media only screen and (max-width: 600px) {
+  .home {
+    padding-top: 12px;
+  }
+
+  .projectsCallout {
+    margin: 48px 0 58px;
+  }
+
+  .sectionHeading {
+    margin-bottom: 36px;
+  }
 }
