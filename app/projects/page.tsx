@@ -17,6 +17,24 @@ export interface Project {
 
 const projects: Project[] = [
   {
+    name: "Reverse Search",
+    dir: "reverse_search",
+    captions: [
+      "Homepage",
+      "Playing a puzzle",
+      "Creating a puzzle",
+      "User profile",
+    ],
+    description: [
+      "A word-grid puzzle game inspired by Word Hunt-style adjacency rules. A puzzle gives the player a word list, where \
+      the goal is to reconstruct a board of letters that can spell every required word by tracing adjacent tiles.",
+      "Players can create profiles, make their own puzzles, and then play the puzzle through the browser.",
+      "Tech Stack: Vite React and WebAssembly frontend, Vercel serverless Rust backend, Neon PostgreSQL database, Clerk authentication",
+    ],
+    repo: "https://github.com/tomayyeung/reverse-search",
+    link: "https://reverse-search.tomay.dev/",
+  },
+  {
     name: "@groq is this true?",
     dir: "groq_is_this_true",
     captions: [
