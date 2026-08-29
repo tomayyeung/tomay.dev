@@ -57,6 +57,10 @@ export default function RootLayout({
             <Link className="footer-link" href="https://leetcode.com/u/thyeung/" target="_blank">
               <Image className="footer-img" src="icons/leetcode.svg" alt="LeetCode" width={25} height={25} />
             </Link>
+
+            <Link className="footer-link" href="https://usfca.joinhandshake.com/profiles/5esaau" target="_blank">
+              <Image className="footer-img" src="icons/handshake.svg" alt="Handshake" width={25} height={25} />
+            </Link>
           </div>
         </div>
       </body>
