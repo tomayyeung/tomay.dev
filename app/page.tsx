@@ -68,7 +68,7 @@ export default function Home() {
             >
               Canvas demo
             </Link>{" "}
-            - A basic demo of canvas functionality in built in preparation for
+            - A basic demo of canvas functionality built in preparation for
             crts.io (see projects).
           </li>
         </ul>
