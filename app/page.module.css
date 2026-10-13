@@ -31,11 +31,6 @@
   margin-bottom: 8px;
 }
 
-.ul {
-  margin-top: 0;
-  padding-left: 1.2em;
-}
-
 .projectsCallout {
   margin: 62px 0 76px;
   padding: 18px 0;
@@ -50,23 +45,6 @@
 
 .sectionHeading {
   font-size: 1.6rem;
-}
-
-.misc {
-  margin-top: 12px;
-}
-
-.misc h2 {
-  margin: 28px 0 20px;
-  font-size: 1.6rem;
-}
-
-.rule {
-  border-top: 1px solid var(--secondary);
-}
-
-.miscLink {
-  padding-bottom: 3px;
 }
 
 @media only screen and (max-width: 600px) {

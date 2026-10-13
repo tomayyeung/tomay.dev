@@ -38,41 +38,6 @@ export default function Home() {
         </li>
         <li>I play chess - I&apos;m president of the chess club at USF!</li>
       </ul>
-
-      <section className={`${styles.misc} float`}>
-        <div className={styles.rule} aria-hidden="true"></div>
-        <h2>Miscellaneous items</h2>
-        <ul className={styles.ul}>
-          <li>
-            <Link
-              className={`internal-link ${styles.miscLink}`}
-              href={"/phreaking"}
-            >
-              Phreaking
-            </Link>{" "}
-            - A quiz-style game of guessing dial tones. Created for an in-class
-            presentation. on{" "}
-            <Link
-              className="external-link"
-              href={"https://en.wikipedia.org/wiki/Phreaking"}
-              target="_blank"
-            >
-              phreaking
-            </Link>
-            .
-          </li>
-          <li>
-            <Link
-              className={`internal-link ${styles.miscLink}`}
-              href={"/canvas-demo"}
-            >
-              Canvas demo
-            </Link>{" "}
-            - A basic demo of canvas functionality built in preparation for
-            crts.io (see projects).
-          </li>
-        </ul>
-      </section>
     </main>
   );
 }
